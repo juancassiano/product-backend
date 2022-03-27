@@ -1,4 +1,4 @@
-import { IProductsRepository } from "../repository/ProductsRepository";
+import { IProductsRepository } from "../repository/IProductsRepository";
 
 interface IProduct {
   name: string;
@@ -7,7 +7,7 @@ interface IProduct {
   upc: number;
 }
 
-class CreateProductService {
+class CreateProductUseCase {
   constructor(private productsRepository: IProductsRepository) {}
 
   execute({ category, name, upc, value }: IProduct): void {
@@ -20,4 +20,4 @@ class CreateProductService {
   }
 }
 
-export { CreateProductService };
+export { CreateProductUseCase };
