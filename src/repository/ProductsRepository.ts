@@ -1,25 +1,19 @@
 import { Product } from "../model/Product";
+import { ICreateProductDTO, IProductsRepository } from "./IProductsRepository";
 
-interface ICreateProductDTO {
-  name: string;
-  description: string;
-  upc: number;
-  value: number;
-}
-
-class ProductsRepository {
+class ProductsRepository implements IProductsRepository {
   private products: Product[];
 
   constructor() {
     this.products = [];
   }
 
-  create({ description, name, upc, value }: ICreateProductDTO): void {
+  create({ category, name, upc, value }: ICreateProductDTO): void {
     const product = new Product();
 
     Object.assign(product, {
       name,
-      description,
+      category,
       value,
       upc,
       created_at: new Date(),
@@ -30,6 +24,11 @@ class ProductsRepository {
 
   list(): Product[] {
     return this.products;
+  }
+
+  findByName(name: string): Product {
+    const product = this.products.find((product) => product.name === name);
+    return product;
   }
 }
 
