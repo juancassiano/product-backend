@@ -1,27 +1,23 @@
 import { Router, Request, Response } from "express";
 
 import { Product } from "../model/Product";
+import { ProductsRepository } from "../repository/ProductsRepository";
 
 const productsRoutes = Router();
-
-const products: Product[] = [];
+const productsRepository = new ProductsRepository();
 
 productsRoutes.post("/", (request: Request, response: Response) => {
   const { name, description, value, upc } = request.body;
 
-  const product = new Product();
+  productsRepository.create({ name, description, value, upc });
 
-  Object.assign(product, {
-    name,
-    description,
-    value,
-    upc,
-    created_at: new Date(),
-  });
+  return response.status(201).send();
+});
 
-  products.push(product);
+productsRoutes.get("/", (request: Request, response: Response) => {
+  const allProducts = productsRepository.list();
 
-  return response.status(201).json({ product });
+  return response.status(200).json(allProducts);
 });
 
 export { productsRoutes };
