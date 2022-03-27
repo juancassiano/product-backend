@@ -1,18 +1,17 @@
 import { Router, Request, Response } from "express";
 
-import { Product } from "../model/Product";
-import { ProductsRepository } from "../repository/ProductsRepository";
-import { CreateProductService } from "../services/CreateProductService";
+import { ProductsRepository } from "../modules/Product/repository/ProductsRepository";
+import { CreateProductService } from "../modules/Product/services/CreateProductService";
 
 const productsRoutes = Router();
 const productsRepository = new ProductsRepository();
 
 productsRoutes.post("/", (request: Request, response: Response) => {
-  const { name, description, value, upc } = request.body;
+  const { name, category, value, upc } = request.body;
 
   const createProductService = new CreateProductService(productsRepository);
 
-  createProductService.execute({ name, description, value, upc });
+  createProductService.execute({ name, category, value, upc });
 
   return response.status(201).send();
 });
