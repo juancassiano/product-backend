@@ -2,7 +2,7 @@ import { ProductsRepository } from "../../repository/ProductsRepository";
 import { ListProductsController } from "./ListProductsController";
 import { ListProductsUseCase } from "./ListProductsUseCase";
 
-const productsRepository = new ProductsRepository();
+const productsRepository = ProductsRepository.getInstance();
 const listProductsUseCase = new ListProductsUseCase(productsRepository);
 const listProductController = new ListProductsController(listProductsUseCase);
 

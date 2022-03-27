@@ -4,8 +4,17 @@ import { ICreateProductDTO, IProductsRepository } from "./IProductsRepository";
 class ProductsRepository implements IProductsRepository {
   private products: Product[];
 
+  private static INSTANCE: ProductsRepository;
+
   constructor() {
     this.products = [];
+  }
+
+  public static getInstance(): ProductsRepository {
+    if (!ProductsRepository.INSTANCE) {
+      ProductsRepository.INSTANCE = new ProductsRepository();
+    }
+    return ProductsRepository.INSTANCE;
   }
 
   create({ category, name, upc, value }: ICreateProductDTO): void {

@@ -1,10 +1,13 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 
-import { productsRoutes } from "./routes/products.routes";
+import { router } from "./routes";
 
 const app = express();
+
 app.use(express.json());
 
-app.use("/products", productsRoutes);
+app.use(router);
 
-app.listen(3000);
+app.listen("3000", () => {
+  console.log("listening on http://localhost:3000");
+});
