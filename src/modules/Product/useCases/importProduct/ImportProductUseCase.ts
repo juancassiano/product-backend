@@ -26,6 +26,7 @@ class ImportProductUseCase {
           products.push({ name, category, value, upc });
         })
         .on("end", () => {
+          fs.promises.unlink(file.path);
           resolve(products);
         })
         .on("error", (err) => {
