@@ -1,0 +1,94 @@
+{
+  "openapi": "3.0.0",
+  "info":{
+    "title": "Product Documentation",
+    "description": "This is a sample server for create Product",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Juan Cassiano",
+      "email": "juancassiano@hotmail.com"
+    }
+  },
+  "paths":{
+    "/products": {
+      "post":{
+        "tags": ["Products"],
+        "summary": "Create a new Product",
+        "description":"This is a sample for create Product",
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "properties":{
+                  "name": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "value":{
+                    "type":"number"
+                  },
+                  "upc":{
+                    "type": "number"
+                  }
+                },
+                "example": {
+                  "name": "Cerveja",
+                  "category":"Bebida alcoolica",
+                  "value": 3.99,
+                  "upc":12345678
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "201":{
+            "description":"Created"
+          },
+          "500":{
+            "description":"Product Already Exists"
+          }
+        }
+      },
+      "get":{
+        "tags": ["Products"],
+        "summary": "List All Products",
+        "description":"List All Products",
+        "responses":{
+          "200":{
+            "description":"Success",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type": "array",
+                  "items":{
+                    "type": "object",
+                    "properties":{
+                      "name": {
+                        "type": "string"
+                      },
+                      "category":{
+                        "type": "string"
+                      },
+                      "value": {
+                        "type":"number"
+                      },
+                      "upc": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
