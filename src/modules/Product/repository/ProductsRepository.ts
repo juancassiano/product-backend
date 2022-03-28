@@ -4,6 +4,7 @@ import { ICreateProductDTO, IProductsRepository } from "./IProductsRepository";
 class ProductsRepository implements IProductsRepository {
   private products: Product[];
 
+  // eslint-disable-next-line no-use-before-define
   private static INSTANCE: ProductsRepository;
 
   constructor() {
